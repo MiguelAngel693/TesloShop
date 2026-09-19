@@ -1,6 +1,6 @@
 import { Routes } from "@angular/router";
 import { StoreFrontLayout } from "./layouts/store-front-layout/store-front-layout";
-import { Home } from "./pages/home-page/home";
+import { Home } from "./pages/home/home";
 import { Gender } from "./pages/gender-page/gender-page";
 import { Product } from "./pages/product/product";
 import { NotFound } from "./pages/not-found/not-found";
