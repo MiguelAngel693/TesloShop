@@ -9,18 +9,13 @@ import { rxResource } from '@angular/core/rxjs-interop';
   imports: [ProductCard],
   templateUrl: './home.html',
 })
-export class Home implements AfterViewInit{
+export class Home{
   private productService = inject(Product);
-
-  ngAfterViewInit(){
-    console.log('214');
-
-  }
 
   productResource = rxResource({
     params: () => ({}),
     stream: ({ params }) => (
-      this.productService.getProducts()
+      this.productService.getProducts({})
     )
 
   })
