@@ -1,10 +1,7 @@
 import { ProductElement } from '@/products/interfaces/product-response';
-import { Product } from '@/products/services/product';
-import { JsonPipe } from '@angular/common';
-import { AfterViewInit, Component, computed, effect, inject, input, signal } from '@angular/core';
-import { rxResource } from '@angular/core/rxjs-interop';
+import { ProductService } from '@/products/services/product';
+import { Component, computed, inject, input, } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { delay, map } from 'rxjs';
 import { NamePipe } from '../../../products/pipes/product.image';
 
 @Component({
@@ -13,7 +10,7 @@ import { NamePipe } from '../../../products/pipes/product.image';
   templateUrl: './product-card.html',
 })
 export class ProductCard {
-  productService = inject(Product);
+  productService = inject(ProductService);
 
   product = input.required<ProductElement>();
 

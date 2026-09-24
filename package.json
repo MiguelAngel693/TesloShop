@@ -33,6 +33,7 @@
     "daisyui": "^5.7.42",
     "postcss": "^8.5.28",
     "rxjs": "~7.8.0",
+    "swiper": "^14.2.0",
     "tailwindcss": "^4.3.3",
     "tslib": "^2.3.0"
   },

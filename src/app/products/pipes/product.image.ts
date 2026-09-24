@@ -17,6 +17,6 @@ export class NamePipe implements PipeTransform {
       return baseUrl+'/'+url[0];
     }
 
-    return './public/static/images/no-image.jpg';
+    return `${baseUrl}/files/product/${url}`;
   }
 }
