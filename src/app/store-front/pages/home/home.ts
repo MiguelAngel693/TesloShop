@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, inject, signal } from '@angular/core';
-import { ProductCard } from '../../components/product-card/product-card';
 import { ProductService } from '@/products/services/product';
 import { rxResource } from '@angular/core/rxjs-interop';
+import { ProductCard } from '@/products/components/product-card/product-card';
 
 
 @Component({
