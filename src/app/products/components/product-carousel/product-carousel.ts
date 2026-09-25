@@ -5,16 +5,16 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 import {Navigation, Pagination} from 'swiper/modules';
-import { NamePipe } from '../../pipes/product.image';
+import { ImagePipe } from '../../pipes/product.image';
 
 @Component({
   selector: 'product-carousel',
-  imports: [NamePipe],
+  imports: [ImagePipe],
   templateUrl: './product-carousel.html',
   styles: `
     .swiper{
       width: 100%;
-      height: 500px;
+      height: 100%;
     }
   `,
 })

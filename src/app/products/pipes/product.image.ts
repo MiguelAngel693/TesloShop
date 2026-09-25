@@ -7,7 +7,7 @@ const baseUrl = environment.baseUrl+'/files/product';
   name: 'image'
 })
 
-export class NamePipe implements PipeTransform {
+export class ImagePipe implements PipeTransform {
   transform(url: string | string[]): string {
     if(typeof url === 'string'){
       return baseUrl+'/'+url;

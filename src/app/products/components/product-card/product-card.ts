@@ -2,11 +2,12 @@ import { ProductElement } from '@/products/interfaces/product-response';
 import { ProductService } from '@/products/services/product';
 import { Component, computed, inject, input, } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { NamePipe } from '../../../products/pipes/product.image';
+import { ImagePipe } from '../../../products/pipes/product.image';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'product-card',
-  imports: [RouterLink, NamePipe],
+  imports: [RouterLink, ImagePipe],
   templateUrl: './product-card.html',
 })
 export class ProductCard {
