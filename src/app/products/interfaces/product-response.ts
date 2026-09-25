@@ -3,10 +3,10 @@ import { User } from "@/auth/interfaces/user";
 export interface ProductResponse {
   count:    number;
   pages:    number;
-  products: ProductElement[];
+  products: Product[];
 }
 
-export interface ProductElement {
+export interface Product {
   id:          string;
   title:       string;
   price:       number;

@@ -1,0 +1,14 @@
+<div class="join flex justify-center items-center mt-4 mb-10">
+  @for (page of getPages(); track page) {
+    <button class="btn" [routerLink]="[]" [class.btn-primary]="page === currentPage()" [queryParams]="{page: page}" (click)="activePage.set(page)">
+      {{ page }}
+    </button>
+  <!-- <input class="join-item btn btn-square" type="radio" name="options" aria-label="{{page}}" checked="checked"
+    [routerLink]="[]" [queryParams]="{page: page}" (click)="activePage.set(page)"/> -->
+
+
+  }
+  <!-- <input class="join-item btn btn-square" type="radio" name="options" aria-label="2" />
+  <input class="join-item btn btn-square" type="radio" name="options" aria-label="3" />
+  <input class="join-item btn btn-square" type="radio" name="options" aria-label="4" /> -->
+</div>
