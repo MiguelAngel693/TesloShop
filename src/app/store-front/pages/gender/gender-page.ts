@@ -18,8 +18,13 @@ export class Gender {
 
 
   productResource = rxResource({
-    params: () => ({gender: this.gender(), page: this.pagination.currentPage() - 1 }),
-    stream: ({params}) => (this.productService.getProducts({gender: params.gender, offset: params.page*9}))
+    params: () => ({ gender: this.gender(), page: this.pagination.currentPage() - 1 }),
+    stream: ({ params }) => (
+      this.productService.getProducts({
+        gender: params.gender,
+        offset: params.page * 9
+      }
+      ))
   });
 
   gender = toSignal(
