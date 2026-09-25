@@ -6,7 +6,7 @@
 
 
 @if(productResource.hasValue()){
-<div class="grid grid-cols-1 sm:grid-cols-2  gap-3">
+<div class="grid grid-cols-1 sm:grid-cols-2  gap-3 animate-fadeIn">
   <!-- Imagenes -->
   <product-carousel [images]="productResource.value().images "></product-carousel>
   <!-- <img class="rounded-2xl" [src]="productResource.value()?.images ?? [] | image" alt=""> -->
