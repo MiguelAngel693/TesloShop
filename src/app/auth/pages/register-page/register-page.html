@@ -1,0 +1,109 @@
+<h1 class="text-2xl font-montserrat text-secondary text-center mb-2 font-bold">Registro</h1>
+<form class="flex flex-col gap-2" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <!--!----------------------------fullName------------------------ -->
+  <label class="input validator">
+    <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
+        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </g>
+    </svg>
+    <input formControlName="fullName" type="text" required placeholder="Nombre" minlength="3" maxlength="30"
+      title="Solo letras" />
+  </label>
+  @if (formUtils.isValidField('fullName',registerForm)) {
+  <span class="form-text text-red-500">
+    <!-- {{ formUtils.getFieldError('name',form)}} -->
+    Debe ser nombre y apellido
+    <!-- Debe de ser en formato de nombre y apellido -->
+  </span>
+  }
+  <!--! ---------------------------Email----------------------------- -->
+  <label class="input validator">
+    <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
+        <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+      </g>
+    </svg>
+    <input formControlName="email" type="text" required placeholder="Correo electrónico" minlength="3" maxlength="30" />
+  </label>
+  @if (formUtils.isValidField('email',registerForm)) {
+  <span class="form-text text-red-500">
+    {{ formUtils.getFieldError('email',registerForm)}}
+    <!-- El valor ingresado no parece un correo electronico -->
+    <!-- mensaje de error del email -->
+  </span>
+  }
+  <!--! ---------------------------password----------------------------- -->
+
+  <label class="input validator">
+    <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
+        <path
+          d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z">
+        </path>
+        <circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle>
+      </g>
+    </svg>
+
+    <input formControlName="password" type="password" required placeholder="Contraseña"
+      title="Al menos 6 caracteres. Debe incluir mayúsculas, minúsculas y un numero" />
+  </label>
+  @if (formUtils.isValidField('password',registerForm)) {
+
+  <span class="form-text text-red-500">
+    {{ formUtils.getFieldError('password',registerForm)}}
+  </span>
+  }
+  <!--! --------------------------Password2------------------------------ -->
+  <label class="input validator">
+    <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
+        <path
+          d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z">
+        </path>
+        <circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle>
+      </g>
+    </svg>
+    <input formControlName="password2" type="password" required placeholder="Confirmar contraseña"
+      title="Debe ser igual a la contraseña" />
+  </label>
+  @if (registerForm.errors && registerForm.controls['password2'].touched && registerForm.validator) {
+  <span class="text-red-500">
+    Las contraseñas no coinciden
+  </span>
+  }
+  <button class="btn btn-secondary">
+    Confirmar registro
+  </button>
+</form>
+
+
+@if(hasError() && showAlertError()){
+
+<div role="alert" class="alert alert-error animate-fadeIn fixed bottom-5 right-5 cursor-pointer"
+  (click)="showAlertError.set(false)">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+      d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+  <pre>
+  </pre>
+  <span>Verifique la informacion ingresada</span>
+</div>
+}
+
+@if(success() && showAlertSuccess()){
+<div role="alert" class="alert bg-green-600 animate-fadeIn fixed bottom-5 right-5 cursor-pointer"
+  (click)="showAlertSuccess.set(false)">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+      d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+  <pre>
+    </pre>
+  <span class="text-white">Registro exitoso, volviendo a la página principal</span>
+</div>
+
+}

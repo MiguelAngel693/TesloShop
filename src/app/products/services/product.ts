@@ -34,7 +34,7 @@ export class ProductService {
         gender: gender
       }
     }).pipe(
-      tap(resp => console.log(resp)),
+      // tap(resp => console.log(resp)),
       tap(resp => this.productsCache.set(key, resp))
     )
   }
@@ -44,7 +44,7 @@ export class ProductService {
       return of(this.singleProductCache.get(slugId)!)
 
     return this.http.get<Product>(`${baseUrl}/products/${slugId}`).pipe(
-      tap((resp) => { console.log(resp); }),
+      // tap((resp) => { console.log(resp); }),
       tap((resp) => this.singleProductCache.set(slugId, resp)),
     );
   }
