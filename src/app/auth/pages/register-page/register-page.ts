@@ -2,7 +2,7 @@ import { AuthService } from '@/auth/services/auth-service';
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { FormUtils } from '../../utils/form-utils';
+import { FormUtils } from '../../../shared/utils/form-utils';
 import { delay, map, pipe } from 'rxjs';
 import { JsonPipe } from '@angular/common';
 
