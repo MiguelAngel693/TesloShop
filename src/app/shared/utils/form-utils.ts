@@ -53,7 +53,7 @@ export class FormUtils {
 
       }
     }
-    return null
+    return '';
   }
 
   static isValidField(fieldName: string, form: FormGroup): boolean | null {

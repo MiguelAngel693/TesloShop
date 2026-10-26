@@ -40,13 +40,29 @@ export class ProductService {
   }
 
   getProductByIdSlug(slugId: string): Observable<Product> {
-    if(this.singleProductCache.has(slugId))
+    if (this.singleProductCache.has(slugId))
       return of(this.singleProductCache.get(slugId)!)
 
     return this.http.get<Product>(`${baseUrl}/products/${slugId}`).pipe(
       // tap((resp) => { console.log(resp); }),
       tap((resp) => this.singleProductCache.set(slugId, resp)),
     );
+  }
+
+  updateProduct(productLike: Partial<Product>, id: string): Observable<Product> {
+    return this.http.patch<Product>(`${baseUrl}/products/${id}`, productLike).pipe(
+      tap((product)=> {this.updateProductCache(product)})
+    );
+  }
+
+  updateProductCache(product: Product) {
+    // Opcion: eliminar cache al actualizar un producto
+    const { id } = product;
+    this.singleProductCache.set(id, product);
+
+    this.productsCache.forEach(response => {
+      response.products = response.products.map((current) => current.id === id ? product : current)
+    })
   }
 
 }

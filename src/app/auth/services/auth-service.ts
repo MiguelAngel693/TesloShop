@@ -34,11 +34,13 @@ export class AuthService {
     return 'not-authenticated'
   });
 
-  // user = computed(() => (this._user()));
-  // token = computed(() => (this._token()));
+  user = computed(() => (this._user()));
+  token = computed(() => (this._token()));
+  // isAdmin = computed(() => (this._user()?.roles.some((role) => role === 'admin') ?? false))
+  isAdmin = computed(() => (this._user()?.roles.includes('admin') ?? false))
 
-  readonly user = this._user.asReadonly();
-  readonly token = this._token.asReadonly();
+  // readonly user = this._user.asReadonly();
+  // readonly token = this._token.asReadonly();
 
   login(email: string, password: string): Observable<boolean> {
     return this.http.post<AuthResponse>(`${baseUrl}/auth/login`, {
@@ -57,12 +59,14 @@ export class AuthService {
     })
   }
 
+  //TODO: implementar cache para checkStatus()
   checkStatus(): Observable<boolean> {
     const token = localStorage.getItem('token');
     if (!token) {
       this.logout();
       return of(false)
     };
+
     return this.http.get<AuthResponse>(`${baseUrl}/auth/check-status`, {
       // headers: {
       //   Authorization: `Bearer ${token}`
