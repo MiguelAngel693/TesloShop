@@ -1,11 +1,12 @@
 import { Product } from '@/products/interfaces/product-response';
-import { Component, inject, input, OnInit } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { ProductCarousel } from '@/products/components/product-carousel/product-carousel';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormUtils } from '@/shared/utils/form-utils';
 import { FormLabelError } from '@/shared/components/form-label-error/form-label-error';
 import { ProductService } from '@/products/services/product';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'product-details',
@@ -18,10 +19,12 @@ export class ProductDetails implements OnInit {
   }
   product = input.required<Product>();
   productService = inject(ProductService);
+  router = inject(Router);
 
 
   formBuilder = inject(FormBuilder);
   formUtils = FormUtils;
+  saved = signal(false);
   productForm = this.formBuilder.group({
     title: ['', Validators.required],
     description: ['', Validators.required],
@@ -52,7 +55,7 @@ export class ProductDetails implements OnInit {
   }
   sizes = ["XS", "S", "M", "L", "XL", "XXL"]
 
-  onSubmit() {
+  async onSubmit() {
     const isValid = this.productForm.valid;
     this.productForm.markAllAsTouched();
     if (!isValid) return;
@@ -64,11 +67,22 @@ export class ProductDetails implements OnInit {
       tags: formValue.tags?.toLocaleLowerCase().split(',').map((tag) => tag.trim()) ?? [],
     }
 
-    this.productService.updateProduct(productLike, this.product().id).subscribe(
-      producto=>{
-        console.log('Producto actualizado!');
-      }
-    );
+    if (this.product().id === 'new') {
+      const product = await firstValueFrom(this.productService.createProduct(productLike));
+
+      // this.productService.createProduct(productLike).subscribe(product => {
+      //   console.log(product);
+      //   console.log("producto creado");
+      // });
+      this.router.navigate(['/admin/product/', product.id]);
+    } else {
+      await firstValueFrom(this.productService.updateProduct(productLike, this.product().id));
+    }
+
+    this.saved.set(true);
+    setTimeout(()=>{
+      this.saved.set(false)
+    },3000);
 
   }
 

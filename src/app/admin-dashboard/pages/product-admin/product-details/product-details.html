@@ -81,3 +81,14 @@
     <input type="file" class="file-input file-input-bordered w-full mt-4" />
   </div>
 </form>
+
+@if (saved()) {
+  <div class="alert alert-success fixed bottom-4 right-4 w-80" animate.enter="animate-fadeIn" animate.leave="animate-fadeOut">
+    <h1>hola mundo</h1>
+  </div>
+  <!-- <div class="alert alert-success fixed bottom-4 right-4 w-80 animate-fadeIn">
+    <span> Datos actualizados correctamente </span>
+
+  </div> -->
+
+}

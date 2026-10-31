@@ -3,6 +3,8 @@ import { inject, Injectable } from '@angular/core';
 import { Product, ProductResponse } from '../interfaces/product-response';
 import { map, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
+import { User } from '@/auth/interfaces/user';
+import { Gender } from '@/store-front/pages/gender/gender-page';
 
 const baseUrl = environment.baseUrl;
 
@@ -10,6 +12,20 @@ interface Options {
   limit?: number,
   offset?: number,
   gender?: string,
+}
+
+const emptyProduct: Product = {
+  id: 'new',
+  title: '',
+  price: 0,
+  description: '',
+  slug: '',
+  stock: 0,
+  sizes: [],
+  gender: '',
+  tags: [],
+  images: [],
+  user: {} as User
 }
 
 @Injectable({ providedIn: 'root' })
@@ -40,6 +56,9 @@ export class ProductService {
   }
 
   getProductByIdSlug(slugId: string): Observable<Product> {
+    if (slugId === 'new')
+      return of(emptyProduct);
+
     if (this.singleProductCache.has(slugId))
       return of(this.singleProductCache.get(slugId)!)
 
@@ -51,8 +70,15 @@ export class ProductService {
 
   updateProduct(productLike: Partial<Product>, id: string): Observable<Product> {
     return this.http.patch<Product>(`${baseUrl}/products/${id}`, productLike).pipe(
-      tap((product)=> {this.updateProductCache(product)})
+      tap((product) => { this.updateProductCache(product) })
     );
+  }
+
+  createProduct(productLike: Partial<Product>): Observable<Product> {
+    return this.http.post<Product>(`${baseUrl}/products`, productLike).pipe(
+      tap((product) => { console.log(product); }),
+      tap((product) => { this.updateProductCache(product) })
+    )
   }
 
   updateProductCache(product: Product) {
@@ -64,5 +90,7 @@ export class ProductService {
       response.products = response.products.map((current) => current.id === id ? product : current)
     })
   }
+
+
 
 }

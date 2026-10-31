@@ -12,6 +12,8 @@
         class="w-full object-cover rounded-xl"
       />
     </div>
+    }@empty {
+      <img [src]="'' | image" alt="">
     }
   </div>
   <!-- If we need pagination -->

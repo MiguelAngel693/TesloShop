@@ -4,10 +4,11 @@ import { ProductService } from '@/products/services/product';
 import { PaginationService } from '@/shared/components/pagination/pagination-service';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { Pagination } from '@/shared/components/pagination/pagination';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-products-admin',
-  imports: [ProductTable, Pagination],
+  imports: [ProductTable, Pagination, RouterLink],
   templateUrl: './products-admin.html',
 })
 export class ProductsAdmin {
