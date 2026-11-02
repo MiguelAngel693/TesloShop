@@ -10,12 +10,13 @@
       [class.border-red-500]="productForm.get('title')?.errors ?? false" />
     <form-label-error [control]="productForm.controls.title" />
     <!-- ! Slug -->
-    <input formControlName="slug" type="text" placeholder="Slug" class="input input-bordered w-full"[class.border-red-500]="productForm.get('slug')?.errors ?? false" />
+    <input formControlName="slug" type="text" placeholder="Slug" class="input input-bordered w-full"
+      [class.border-red-500]="productForm.get('slug')?.errors ?? false" />
     <form-label-error [control]="productForm.controls.slug" />
 
     <!-- ! Descripcion -->
-    <textarea formControlName="description" class="textarea textarea-bordered" placeholder="Descripción"
-      rows="6" [class.border-red-500]="productForm.get('description')?.errors ?? false"></textarea>
+    <textarea formControlName="description" class="textarea textarea-bordered" placeholder="Descripción" rows="6"
+      [class.border-red-500]="productForm.get('description')?.errors ?? false"></textarea>
     <form-label-error [control]="productForm.get('description')!" />
 
     <h2 class="text-lg font-bold">Datos de venta</h2>
@@ -24,13 +25,15 @@
       <!-- ! Precio -->
       <div>
         <input formControlName="price" type="number" placeholder="Precio" class="input input-bordered w-full" />
-        <form-label-error [control]="productForm.get('price')!" [class.border-red-500]="productForm.get('price')?.errors ?? false" />
+        <form-label-error [control]="productForm.get('price')!"
+          [class.border-red-500]="productForm.get('price')?.errors ?? false" />
 
       </div>
       <!-- ! Stock -->
       <div>
-        <input formControlName="stock" type="number" placeholder="Inventario"[class.border-red-500]="productForm.get('stock')?.errors ?? false" class="input input-bordered w-full" />
-        <form-label-error [control]="productForm.get('stock')!"/>
+        <input formControlName="stock" type="number" placeholder="Inventario"
+          [class.border-red-500]="productForm.get('stock')?.errors ?? false" class="input input-bordered w-full" />
+        <form-label-error [control]="productForm.get('stock')!" />
 
       </div>
     </div>
@@ -76,17 +79,27 @@
       </button>
     </div>
 
-    <product-carousel [images]="product().images" />
+    <product-carousel [images]="imagesToCarousel()" />
 
-    <input type="file" class="file-input file-input-bordered w-full mt-4" />
+    <input type="file" multiple accept="image/*" class="file-input file-input-bordered w-full mt-4"
+      (change)="onFilesChanged($event)" />
+
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+      @for (image of tempImages(); track image) {
+        <img [src]="image" alt="Imagen temporal" class="w-full object-cover rounded-xl mt-2">
+      }
+
+    </div>
+
   </div>
 </form>
 
 @if (saved()) {
-  <div class="alert alert-success fixed bottom-4 right-4 w-80" animate.enter="animate-fadeIn" animate.leave="animate-fadeOut">
-    <h1>hola mundo</h1>
-  </div>
-  <!-- <div class="alert alert-success fixed bottom-4 right-4 w-80 animate-fadeIn">
+<div class="alert alert-success fixed bottom-4 right-4 w-80" animate.enter="animate-fadeIn"
+  animate.leave="animate-fadeOut">
+  <h1>Datos actualizados correctamente</h1>
+</div>
+<!-- <div class="alert alert-success fixed bottom-4 right-4 w-80 animate-fadeIn">
     <span> Datos actualizados correctamente </span>
 
   </div> -->

@@ -12,6 +12,9 @@ export class ImagePipe implements PipeTransform {
     if (value === '' || value === null)
       return './static/images/no-image.jpg';
 
+    if (typeof value === 'string' && value.startsWith('blob:')) {
+      return value;
+    }
 
     if (typeof value === 'string') {
       return baseUrl + '/' + value;
